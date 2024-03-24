@@ -18,7 +18,7 @@ public class HelloApplication extends Application {
 //    private double y = 0;
     @Override
     public void start(Stage stage) throws IOException {
-        URL fxmlUrl = getClass().getResource("/com/example/demo/Views/dashboard.fxml");
+        URL fxmlUrl = getClass().getResource("/com/example/demo/Views/signup.fxml");
         System.out.println("FXML file location: " + fxmlUrl);
         if (fxmlUrl == null) {
             throw new FileNotFoundException("FXML file not found");

@@ -2,7 +2,6 @@
 
 <?import java.lang.String?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
@@ -217,7 +216,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="book_room_form" layoutX="13.0" layoutY="60.0" prefHeight="537.0" prefWidth="587.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="book_room_form" layoutX="13.0" layoutY="60.0" prefHeight="537.0" prefWidth="587.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="13.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="14.0" layoutY="14.0" prefHeight="510.0" prefWidth="573.0" stylesheets="@../CSS/dashboard.css">
                                  <styleClass>
@@ -237,7 +236,7 @@
                                                 <Image url="@../../../../../resources/com/example/demo/Icons/search.png" />
                                              </image>
                                           </ImageView>
-                                          <TableView fx:id="book_table" layoutX="14.0" layoutY="59.0" prefHeight="247.0" prefWidth="551.0">
+                                          <TableView fx:id="book_table" layoutX="14.0" layoutY="59.0" onMouseClicked="#showRoomsList" prefHeight="247.0" prefWidth="551.0">
                                             <columns>
                                               <TableColumn fx:id="book_index_col" prefWidth="75.0" text="Index" />
                                               <TableColumn fx:id="book_roomNo_col" prefWidth="94.0" text="Room No" />
@@ -265,12 +264,12 @@
                                           <Font name="Serif Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <ComboBox fx:id="book_room_combo" layoutX="107.0" layoutY="388.0" prefWidth="150.0" promptText="Choose" styleClass="textfield" stylesheets="@../CSS/dashboard.css" />
                                     <Button fx:id="book_btn" layoutX="377.0" layoutY="444.0" mnemonicParsing="false" styleClass="book-btn" stylesheets="@../CSS/dashboard.css" text="Book Now!">
                                        <font>
                                           <Font name="Serif Bold" size="18.0" />
                                        </font>
                                     </Button>
+                                    <TextField fx:id="book_roomNo_tfield" layoutX="107.0" layoutY="388.0" styleClass="textfield" stylesheets="@../CSS/dashboard.css" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -293,7 +292,7 @@
                               </AnchorPane>
                            </children>
                         </AnchorPane>
-                        <AnchorPane fx:id="profile_form" layoutX="8.0" layoutY="38.0" prefHeight="537.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                        <AnchorPane fx:id="profile_form" layoutX="8.0" layoutY="38.0" prefHeight="537.0" prefWidth="600.0" visible="false" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                            <children>
                               <AnchorPane layoutX="6.0" layoutY="14.0" prefHeight="505.0" prefWidth="600.0" stylesheets="@../CSS/dashboard.css">
                                  <children>

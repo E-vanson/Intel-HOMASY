@@ -84,6 +84,7 @@ public class LogInController implements Initializable {
                     alert.setHeaderText(null);
                     alert.setContentText("Successfully Login!");
                     alert.showAndWait();
+                    AuthController.authorise(username.getText(), password.getText());
 
                   try {
                         login_btn.getScene().getWindow().hide();
@@ -133,12 +134,6 @@ public class LogInController implements Initializable {
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-//        login_btn.setOnAction(new EventHandler<ActionEvent>() {
-//            @Override
-//            public void handle(ActionEvent event) {
-//                SceneController.changeScene(event,"/com/example/demo/Views/dashboard.fxml","Dashboard");
-//            }
-//        });
 
     }
     //close window method
