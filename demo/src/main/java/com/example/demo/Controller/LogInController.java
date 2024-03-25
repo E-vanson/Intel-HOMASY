@@ -55,10 +55,13 @@ public class LogInController implements Initializable {
     private PreparedStatement prepare;
     private ResultSet resultSet;
 
+    static String storedName = "";
+
 
     //Login user
     public void loginUser(){
         Alert alert;
+
 
         String sql = "SELECT * FROM users WHERE username = ? and password = ?";
         connection = DBConnection.dbConnection();
@@ -74,7 +77,7 @@ public class LogInController implements Initializable {
             if(username.getText().isEmpty() || password.getText().isEmpty()){
                 alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error");
-                alert.setContentText("Please Fill in All Fileds");
+                alert.setContentText("Please Fill in All Fields");
                 alert.show();
             }else{
                 //return true if there is a matching record
@@ -85,6 +88,7 @@ public class LogInController implements Initializable {
                     alert.setContentText("Successfully Login!");
                     alert.showAndWait();
                     AuthController.authorise(username.getText(), password.getText());
+                    storedName = username.getText();
 
                   try {
                         login_btn.getScene().getWindow().hide();
@@ -131,6 +135,11 @@ public class LogInController implements Initializable {
                 }
             }
         }
+    }
+
+    public static String storeUser(){
+        String name = storedName;
+        return name;
     }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

@@ -10,6 +10,8 @@ import java.net.URL;
 import java.sql.*;
 import java.util.Optional;
 import java.util.ResourceBundle;
+import java.util.concurrent.atomic.AtomicReference;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -142,6 +144,10 @@ public class DashboardController implements Initializable {
     private Button rateUs_btn;
 
     @FXML
+    private Label profile_username;
+
+
+    @FXML
     private Button signOut_btn;
 
     @FXML
@@ -202,6 +208,7 @@ public class DashboardController implements Initializable {
             Optional<ButtonType> option = alert.showAndWait();
 
             if (option.get().equals(ButtonType.OK)) {
+                AuthController.deAuthorise(LogInController.storeUser());
 
                 //HIDE YOUR DASHBOARD FORM
                 signOut_btn.getScene().getWindow().hide();
@@ -266,8 +273,100 @@ public class DashboardController implements Initializable {
          book_roomNo_tfield.setText(roomData.getRoomNo());
          book_price_tfield.setText(String.valueOf(roomData.getPrice()));
     }
+
+    public static PreparedStatement pStatement;
+    private String roomNo;
+    int userId;
+
+    AtomicReference<String> amount = new AtomicReference<>("");
+    public void bookRoom(){
+        AuthController.isAuthorized();
+        if(AuthController.isAuthorized()){
+            System.out.println("User can book");
+            Alert alert;
+            //Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+//            alert.setTitle("Book");
+//            alert.setContentText(null);
+//            alert.show();
+
+
+            String user = LogInController.storeUser();
+            String squeryRoom = "SELECT roomNo FROM rooms WHERE id = ?";
+            String updateRoom = "UPDATE rooms SET tenant = ?, status = ? WHERE id = ?";
+            String squeryUser = "SELECT id FROM users WHERE userName = ?";
+            connection = DBConnection.dbConnection();
+
+            try{
+                preparedStatement = connection.prepareStatement(squeryRoom);
+                preparedStatement.setString(1, book_index_tfield.getText());
+                resultSet = preparedStatement.executeQuery();
+                if(resultSet.next()){
+                    roomNo = resultSet.getString("roomNo");
+                }else{
+                     alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setTitle("Error");
+                    alert.setContentText("The room doesN't exist");
+                    alert.show();
+                }
+
+                preparedStatement = connection.prepareStatement(squeryUser);
+                preparedStatement.setString(1, user);
+                resultSet = preparedStatement.executeQuery();
+                if(resultSet.next()){
+                    userId = resultSet.getInt("id");
+                }
+
+                book_btn.setOnAction(event -> {
+                    TextInputDialog dialog = new TextInputDialog();
+                    Alert alert1;
+                    dialog.setTitle("Input Dialog");
+                    dialog.setHeaderText("Please enter amount:");
+                    dialog.setContentText("Amount:");
+
+                    // Show the dialog and wait for the user's response
+                    Optional<String> result = dialog.showAndWait();
+
+                    // Process the user's input
+                    result.ifPresent(value -> {
+                        // Do something with the value entered by the user
+                        System.out.println("User entered: " + value);
+                        // Here, you can store the value in a variable or use it as needed
+                        amount.set(value);
+                    });
+                    alert1 = new Alert(Alert.AlertType.CONFIRMATION);
+                    alert1.setTitle("Booked!!");
+                    alert1.setContentText("You have successfully booked a room");
+                    alert1.show();
+                });
+
+                preparedStatement = connection.prepareStatement(updateRoom);
+                preparedStatement.setInt(1, userId);
+                preparedStatement.setBoolean(2, true);
+                preparedStatement.setInt(3, Integer.parseInt(book_index_tfield.getText()));
+
+                int rowsUpdated = preparedStatement.executeUpdate();
+                if (rowsUpdated > 0) {
+                    System.out.println("Deauthorisation status updated successfully for room: " + roomNo);
+                } else {
+                    System.out.println("Failed to update deauthorisation status for room: " + roomNo);
+                }
+            }catch(SQLException e){
+                e.printStackTrace();
+            }
+        }else{
+            System.out.println("User can not book");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Error");
+            alert.setContentText(null);
+            alert.show();
+        }
+
+    }
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         showRoomsList();
+        username_label.setText(LogInController.storeUser());
+        profile_username.setText(LogInController.storeUser());
+        profile_roomNo.setText(roomNo);
     }
 }

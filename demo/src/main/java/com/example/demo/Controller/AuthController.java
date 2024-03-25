@@ -66,8 +66,64 @@ public class AuthController implements Initializable {
         }
     }
 
-    public static void unAuthorize(){
+    public static void deAuthorise(String username) {
+        String sql = "UPDATE users SET authorized = false WHERE username = ?";
+        connection = DBConnection.dbConnection();
 
+        try {
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setString(1, username);
+            int rowsUpdated = preparedStatement.executeUpdate();
+
+            if (rowsUpdated > 0) {
+                System.out.println("Deauthorisation status updated successfully for user: " + username);
+            } else {
+                System.out.println("Failed to update deauthorisation status for user: " + username);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (preparedStatement != null) { preparedStatement.close(); }
+                if (connection != null) { connection.close(); }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public static boolean isAuthorized(){
+        boolean isAuthorized = false;
+
+        String squery = "SELECT authorized FROM users WHERE username = ?";
+        connection = DBConnection.dbConnection();
+
+        try{
+            preparedStatement = connection.prepareStatement(squery);
+            preparedStatement.setString(1,LogInController.storeUser());
+            resultSet = preparedStatement.executeQuery();
+
+            if(resultSet.next()){
+                isAuthorized = resultSet.getBoolean("authorized");
+            }
+        }catch(SQLException e){
+            e.printStackTrace();
+        }finally {
+            try {
+                if (resultSet != null) {
+                    resultSet.close();
+                }
+                if (preparedStatement != null) {
+                    preparedStatement.close();
+                }
+                if (connection != null) {
+                    connection.close();
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return isAuthorized;
     }
 
     @Override

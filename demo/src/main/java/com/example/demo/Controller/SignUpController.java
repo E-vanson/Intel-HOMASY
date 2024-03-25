@@ -154,5 +154,16 @@ public class SignUpController implements Initializable {
             }
         });
 
+        viewHostels_btn.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                viewHostels(event);
+            }
+        });
+    }
+
+    public void viewHostels(ActionEvent event){
+        viewHostels_btn.getScene().getWindow().hide();
+        SceneController.changeScene("Dashboard", "/com/example/demo/Views/dashboard.fxml");
     }
 }

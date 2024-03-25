@@ -233,10 +233,10 @@
                                           <TextField fx:id="book_search" layoutX="44.0" layoutY="14.0" promptText="search" />
                                           <ImageView fitHeight="20.0" fitWidth="20.0" layoutX="24.0" layoutY="16.0" pickOnBounds="true" preserveRatio="true">
                                              <image>
-                                                <Image url="@../../../../../resources/com/example/demo/Icons/search.png" />
+                                                <Image url="@../Icons/search.png" />
                                              </image>
                                           </ImageView>
-                                          <TableView fx:id="book_table" layoutX="14.0" layoutY="59.0" onMouseClicked="#showRoomsList" prefHeight="247.0" prefWidth="551.0">
+                                          <TableView fx:id="book_table" layoutX="14.0" layoutY="39.0" onMouseClicked="#bookRoomSelect" prefHeight="323.0" prefWidth="551.0">
                                             <columns>
                                               <TableColumn fx:id="book_index_col" prefWidth="75.0" text="Index" />
                                               <TableColumn fx:id="book_roomNo_col" prefWidth="94.0" text="Room No" />
@@ -247,29 +247,29 @@
                                           </TableView>
                                        </children>
                                     </AnchorPane>
-                                    <Label fx:id="book_pane" layoutX="20.0" layoutY="345.0" prefHeight="16.0" prefWidth="50.0" text="Index">
+                                    <Label fx:id="book_pane" layoutX="26.0" layoutY="403.0" prefHeight="16.0" prefWidth="50.0" text="Index">
                                        <font>
                                           <Font name="Serif Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="book_index_tfield" layoutX="107.0" layoutY="343.0" styleClass="textfield" stylesheets="@../CSS/dashboard.css" />
-                                    <Label layoutX="20.0" layoutY="390.0" prefHeight="19.0" prefWidth="87.0" text="Room No">
+                                    <TextField fx:id="book_index_tfield" layoutX="107.0" layoutY="391.0" styleClass="textfield" stylesheets="@../CSS/dashboard.css" />
+                                    <Label layoutX="14.0" layoutY="435.0" prefHeight="19.0" prefWidth="87.0" text="Room No">
                                        <font>
                                           <Font name="Serif Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <TextField fx:id="book_price_tfield" layoutX="107.0" layoutY="445.0" styleClass="textfield" stylesheets="@../CSS/dashboard.css" />
-                                    <Label layoutX="26.0" layoutY="448.0" prefHeight="16.0" prefWidth="50.0" text="Price">
+                                    <TextField fx:id="book_price_tfield" layoutX="107.0" layoutY="475.0" styleClass="textfield" stylesheets="@../CSS/dashboard.css" />
+                                    <Label layoutX="26.0" layoutY="477.0" prefHeight="16.0" prefWidth="50.0" text="Price">
                                        <font>
                                           <Font name="Serif Bold" size="15.0" />
                                        </font>
                                     </Label>
-                                    <Button fx:id="book_btn" layoutX="377.0" layoutY="444.0" mnemonicParsing="false" styleClass="book-btn" stylesheets="@../CSS/dashboard.css" text="Book Now!">
+                                    <Button fx:id="book_btn" layoutX="377.0" layoutY="444.0" mnemonicParsing="false" onAction="#bookRoom" styleClass="book-btn" stylesheets="@../CSS/dashboard.css" text="Book Now!">
                                        <font>
                                           <Font name="Serif Bold" size="18.0" />
                                        </font>
                                     </Button>
-                                    <TextField fx:id="book_roomNo_tfield" layoutX="107.0" layoutY="388.0" styleClass="textfield" stylesheets="@../CSS/dashboard.css" />
+                                    <TextField fx:id="book_roomNo_tfield" layoutX="107.0" layoutY="433.0" styleClass="textfield" stylesheets="@../CSS/dashboard.css" />
                                  </children>
                               </AnchorPane>
                            </children>
@@ -320,14 +320,14 @@
                                                       <Font name="Serif Bold" size="14.0" />
                                                    </font>
                                                 </Label>
-                                                <Label layoutX="59.0" layoutY="203.0" prefHeight="16.0" prefWidth="111.0" text="Evanson">
+                                                <Label fx:id="profile_username" layoutX="59.0" layoutY="203.0" prefHeight="16.0" prefWidth="111.0">
                                                    <font>
                                                       <Font name="Serif Regular" size="18.0" />
                                                    </font></Label>
                                                 <Line endX="98.0" layoutX="114.0" layoutY="234.0" startX="-98.0" />
                                                 <Line endX="100.0" layoutX="114.0" layoutY="320.0" startX="-100.0" />
                                                 <Line endX="100.0" layoutX="113.0" layoutY="402.0" startX="-100.0" />
-                                                <Label fx:id="profile_show_room" layoutX="83.0" layoutY="292.0" prefHeight="16.0" prefWidth="111.0" text="A6">
+                                                <Label fx:id="profile_show_room" layoutX="83.0" layoutY="292.0" prefHeight="16.0" prefWidth="111.0">
                                                    <font>
                                                       <Font name="Serif Regular" size="18.0" />
                                                    </font>

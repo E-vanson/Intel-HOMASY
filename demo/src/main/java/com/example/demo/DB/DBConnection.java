@@ -12,7 +12,7 @@ public class DBConnection {
 
     public static Connection dbConnection(){
         try{
-            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Intel","root","");
+            Connection connect = DriverManager.getConnection("jdbc:mysql://localhost:3306/Intel","root","root");
             return connect;
             //System.out.println("Connection success");
         }catch (Exception e){
